@@ -1,8 +1,11 @@
 package club.beimeng.book_manage_keshe.controller;
 
 
+import club.beimeng.book_manage_keshe.entity.User;
+import club.beimeng.book_manage_keshe.service.UserService;
 import club.beimeng.book_manage_keshe.utils.R;
 import io.swagger.annotations.Api;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,10 +24,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/book_manage_keshe/user")
 public class UserController {
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("test")
     public R test(){
         System.out.println("hello world");
         return R.ok();
     }
+
 }
 

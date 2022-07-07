@@ -1,6 +1,7 @@
 package club.beimeng.book_manage_keshe.service;
 
 import club.beimeng.book_manage_keshe.entity.User;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -16,4 +17,6 @@ public interface UserService extends IService<User> {
     void registerUser(String username, String encodedPassword, String salt);
 
     boolean verifyUser(String username, String password);
+
+    User getByUsername(String username);
 }

@@ -1,6 +1,7 @@
 package club.beimeng.book_manage_keshe.controller;
 
 
+import club.beimeng.book_manage_keshe.entity.User;
 import club.beimeng.book_manage_keshe.entity.form.LoginForm;
 import club.beimeng.book_manage_keshe.service.UserService;
 import club.beimeng.book_manage_keshe.shiro.JwtToken;
@@ -12,10 +13,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -61,5 +59,14 @@ public class AuthController {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
         return R.ok();
+    }
+
+    @GetMapping("get_info")
+    public R getUser(){
+        Subject subject = SecurityUtils.getSubject();
+        String principal =  (String) subject.getPrincipal();
+        String username = JwtUtils.getUsername(principal);
+        User user = userService.getByUsername(username);
+        return R.ok().data("rows",user);
     }
 }

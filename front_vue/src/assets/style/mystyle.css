@@ -1,0 +1,30 @@
+
+.my-card{
+    width: 340px;
+    height: 340px;
+    background: #ffffff;
+    margin: 10px;
+    padding: 20px;
+}
+
+.my-weight-font{
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    /*font-weight: bolder;*/
+}
+.my-login-card{
+    width: 747px;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    display: flex;
+}
+.my-login-image{
+    width: 458px;
+    /*height: 800px;*/
+    background-image: url("../image/画画.jpg");
+    background-size: 343px;
+    background-repeat: no-repeat;
+}

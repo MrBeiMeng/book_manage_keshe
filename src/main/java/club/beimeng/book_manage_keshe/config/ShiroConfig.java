@@ -56,6 +56,7 @@ public class ShiroConfig {
 //        filterRuleMap.put("/book_manage_keshe/user/test","anon");
         //放行Swagger2页面，需要放行这些
         filterRuleMap.put("/swagger-ui/index.html","anon");
+        filterRuleMap.put("/swagger-ui/*","anon");
         filterRuleMap.put("/swagger/**","anon");
         filterRuleMap.put("/webjars/**", "anon");
         filterRuleMap.put("/swagger-resources/**","anon");

@@ -5,6 +5,7 @@ import club.beimeng.book_manage_keshe.entity.User;
 import club.beimeng.book_manage_keshe.entity.form.LoginForm;
 import club.beimeng.book_manage_keshe.service.EmailService;
 import club.beimeng.book_manage_keshe.service.UserService;
+import club.beimeng.book_manage_keshe.service.VerifyCodeService;
 import club.beimeng.book_manage_keshe.shiro.JwtToken;
 import club.beimeng.book_manage_keshe.utils.JwtUtils;
 import club.beimeng.book_manage_keshe.utils.R;
@@ -36,11 +37,16 @@ public class AuthController {
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private VerifyCodeService verifyCodeService;
+
     @PostMapping("login")
     public R login(LoginForm loginForm){
         if (!userService.verifyUser(loginForm.getUsername(),loginForm.getPassword())){
             return R.error().message("账号或密码错误.");
         }
+
+
 
         String jwtToken = JwtUtils.generate(loginForm.getUsername());
         Subject subject = SecurityUtils.getSubject();
@@ -51,8 +57,10 @@ public class AuthController {
 
     @GetMapping("get_verify_code")
     public R getVerifyCode(String toEmail){
+        //拿到验证码
+        String verifyCode = verifyCodeService.getCode(toEmail);
         // 检验toEmail 合法性
-        emailService.sendSimpleMail("1192384722@qq.com",toEmail,"测试邮件","热爱可抵岁月漫长。");
+        emailService.sendSimpleMail("1192384722@qq.com",toEmail,"测试邮件",verifyCode);
         return R.ok().message("发送成功");
     }
 

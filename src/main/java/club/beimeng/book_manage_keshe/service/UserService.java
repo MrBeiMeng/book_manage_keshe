@@ -1,7 +1,6 @@
 package club.beimeng.book_manage_keshe.service;
 
 import club.beimeng.book_manage_keshe.entity.User;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

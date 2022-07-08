@@ -8,11 +8,13 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.Set;
 
-//@Service
+@Service
 public class VerifyCodeImpl implements VerifyCodeService {
 
     private final HashMap<String, VerifyCode> codeMap = new HashMap<>();
+    private final long maxTime = 60000;
 
     @Override
     public String getCode(String email) {
@@ -25,14 +27,27 @@ public class VerifyCodeImpl implements VerifyCodeService {
             code.append(c);
         }
 
-        codeMap.put(email,new VerifyCode(email,code.toString(),new Date()));
+        //验证码存到codeMap中
+        codeMap.put(email, new VerifyCode(email, code.toString(), new Date()));
+
         return code.toString();
     }
 
     @Override
     public boolean verifyCode(String email, String code) {
         // todo 验证验证码
+        Set<String> codeSet = codeMap.keySet();
 
+        //当前时间
+        Date date = new Date();
+        long time = date.getTime();
+        for (String s : codeSet) {
+            if (time - codeMap.get(s).getCreate_time().getTime() <= maxTime && time - codeMap.get(s).getCreate_time().getTime() >=0) {
+                return true;
+            }else {
+                codeMap.remove(s);
+            }
+        }
         return false;
     }
 }

@@ -27,9 +27,9 @@ public class CodeGenerator {
         // 2、全局配置
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
-        gc.setOutputDir("D:\\code\\java\\book_manage_keshe" + "/src/main/java");
+        gc.setOutputDir("C:\\Users\\cai'xian'sheng\\IdeaProjects\\keShe\\book_manage_keshe" + "/src/main/java");
 
-        gc.setAuthor("包龙");
+        gc.setAuthor("蔡济声");
         gc.setOpen(false); //生成后是否打开资源管理器
         gc.setFileOverride(false); //重新生成时文件是否覆盖
 
@@ -44,10 +44,10 @@ public class CodeGenerator {
 
         // 3、数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://*.*.*.*:3306/book_manage_keshe?serverTimezone=GMT%2B8");
+        dsc.setUrl("jdbc:mysql://49.232.214.227:3306/book_manage_keshe?serverTimezone=GMT%2B8");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("*****");
+        dsc.setPassword("RUANjian123_");
         dsc.setDbType(DbType.MYSQL);
         mpg.setDataSource(dsc);
 
@@ -66,7 +66,7 @@ public class CodeGenerator {
         // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
 
-        strategy.setInclude("user");
+        strategy.setInclude("book");
 
         strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
         strategy.setTablePrefix(pc.getModuleName() + "_"); //生成实体时去掉表前缀

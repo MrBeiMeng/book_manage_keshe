@@ -67,12 +67,15 @@
 
       </div>
     </div>
+    <back-icon-up/>
   </div>
 </template>
 
 <script>
+import BackIconUp from "@/components/BackIconUp";
 export default {
   name: "Register",
+  components: {BackIconUp},
   data(){
     return{
 

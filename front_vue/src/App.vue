@@ -22,7 +22,8 @@
 }
 
 nav {
-  padding: 30px;
+  /*padding: 30px;*/
+  display: inline-block;
 }
 
 nav a {

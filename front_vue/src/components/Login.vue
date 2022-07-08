@@ -67,13 +67,17 @@
     <div class="my-login-image">
 
     </div>
+
+    <back-icon-up/>
   </div>
 </template>
 
 <script>
 import anime from 'animejs/lib/anime.es.js';
+import BackIconUp from "@/components/BackIconUp";
 export default {
   name: "Login",
+  components: {BackIconUp},
   data(){
     return{
       input1:null,
@@ -85,8 +89,7 @@ export default {
       this.$router.push('/register')
     }
   },
-  mounted() {
-  }
+
 }
 </script>
 

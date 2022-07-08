@@ -28,6 +28,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
+    public User getByEmail(String email) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("email",email);
+        return baseMapper.selectOne(queryWrapper);
+    }
+
+    @Override
     public void registerUser(String username, String encodedPassword, String salt) {
         // 判断用户是否存在
         if (getByUsername(username) != null){

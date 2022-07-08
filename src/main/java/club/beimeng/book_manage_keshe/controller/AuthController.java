@@ -7,6 +7,7 @@ import club.beimeng.book_manage_keshe.service.EmailService;
 import club.beimeng.book_manage_keshe.service.UserService;
 import club.beimeng.book_manage_keshe.service.VerifyCodeService;
 import club.beimeng.book_manage_keshe.shiro.JwtToken;
+import club.beimeng.book_manage_keshe.utils.EmailUtils;
 import club.beimeng.book_manage_keshe.utils.JwtUtils;
 import club.beimeng.book_manage_keshe.utils.R;
 import club.beimeng.book_manage_keshe.utils.SaltUtils;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author 包龙
@@ -41,52 +42,67 @@ public class AuthController {
     private VerifyCodeService verifyCodeService;
 
     @PostMapping("login")
-    public R login(LoginForm loginForm){
-        if (!userService.verifyUser(loginForm.getUsername(),loginForm.getPassword())){
+    public R login(LoginForm loginForm) {
+        User user = EmailUtils.isEmail(loginForm.getUsername()) ?
+                userService.getByEmail(loginForm.getUsername()) :
+                userService.getByUsername(loginForm.getUsername());
+
+        /*if (EmailUtils.isEmail(loginForm.getUsername())) {
+            // 传入的是邮箱
+            user = userService.getByEmail(loginForm.getUsername());
+        } else {
+            // 传入的是账号
+            user = userService.getByUsername(loginForm.getUsername());
+        }*/
+
+        if (!userService.verifyUser(loginForm.getUsername(), loginForm.getPassword())) {
             return R.error().message("账号或密码错误.");
         }
 
+        if (!verifyCodeService.verifyCode(user.getEmail(), loginForm.getVerifyCode())) {
 
+            return R.error().message("验证码错误.");
+        }
 
-        String jwtToken = JwtUtils.generate(loginForm.getUsername());
+        String jwtToken = JwtUtils.generate(user.getUsername());
         Subject subject = SecurityUtils.getSubject();
         subject.login(new JwtToken(jwtToken));
 
-        return R.ok().data("token",jwtToken);
+        return R.ok().data("token", jwtToken);
     }
 
     @GetMapping("get_verify_code")
-    public R getVerifyCode(String toEmail){
+    public R getVerifyCode(String toEmail) {
         //拿到验证码
         String verifyCode = verifyCodeService.getCode(toEmail);
         // 检验toEmail 合法性
-        emailService.sendSimpleMail("1192384722@qq.com",toEmail,"测试邮件",verifyCode);
+        emailService.sendSimpleMail("1192384722@qq.com", toEmail, "测试邮件", verifyCode);
         return R.ok().message("发送成功");
     }
 
     @PostMapping("register")
-    public R register(@RequestBody LoginForm loginForm){
+    public R register(@RequestBody LoginForm loginForm) {
         String salt = SaltUtils.getSalt(8);
         // 加密密码
-        String encodedPassword = new Md5Hash(loginForm.getPassword(),salt,21).toHex();
+        String encodedPassword = new Md5Hash(loginForm.getPassword(), salt, 21).toHex();
         // 保存用户
-        userService.registerUser(loginForm.getUsername(),encodedPassword,salt);
+        userService.registerUser(loginForm.getUsername(), encodedPassword, salt);
         return R.ok();
     }
 
     @PostMapping("logout")
-    public R logout(){
+    public R logout() {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
         return R.ok();
     }
 
     @GetMapping("get_info")
-    public R getUser(){
+    public R getUser() {
         Subject subject = SecurityUtils.getSubject();
-        String principal =  (String) subject.getPrincipal();
+        String principal = (String) subject.getPrincipal();
         String username = JwtUtils.getUsername(principal);
         User user = userService.getByUsername(username);
-        return R.ok().data("rows",user);
+        return R.ok().data("rows", user);
     }
 }

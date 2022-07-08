@@ -18,4 +18,6 @@ public interface UserService extends IService<User> {
     boolean verifyUser(String username, String password);
 
     User getByUsername(String username);
+
+    User getByEmail(String email);
 }

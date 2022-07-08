@@ -14,7 +14,6 @@ import java.util.Set;
 public class VerifyCodeImpl implements VerifyCodeService {
 
     private final HashMap<String, VerifyCode> codeMap = new HashMap<>();
-    private final long maxTime = 60000;
 
     @Override
     public String getCode(String email) {
@@ -33,16 +32,19 @@ public class VerifyCodeImpl implements VerifyCodeService {
         return code.toString();
     }
 
+
     @Override
     public boolean verifyCode(String email, String code) {
-        // todo 验证验证码
         Set<String> codeSet = codeMap.keySet();
 
         //当前时间
         Date date = new Date();
         long time = date.getTime();
         for (String s : codeSet) {
-            if (time - codeMap.get(s).getCreate_time().getTime() <= maxTime && time - codeMap.get(s).getCreate_time().getTime() >=0) {
+            long maxTime = 1000 * 60 * 5;
+            if (time - codeMap.get(s).getCreate_time().getTime() <= maxTime
+                    && time - codeMap.get(s).getCreate_time().getTime() >=0) {
+                codeMap.remove(s);
                 return true;
             }else {
                 codeMap.remove(s);

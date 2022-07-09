@@ -28,9 +28,6 @@ public class Book implements Serializable {
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;
 
-    @ApiModelProperty(value = "书籍类别")
-    private String categoryId;
-
     private String bookName;
 
     @ApiModelProperty(value = "内容")

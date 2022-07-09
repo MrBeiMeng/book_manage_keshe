@@ -2,7 +2,7 @@ package club.beimeng.book_manage_keshe.controller;
 
 
 import club.beimeng.book_manage_keshe.entity.Book;
-import club.beimeng.book_manage_keshe.service.BookService;
+import club.beimeng.book_manage_keshe.service.CategoryService;
 import club.beimeng.book_manage_keshe.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,19 +18,18 @@ import java.util.List;
  * </p>
  *
  * @author 蔡济声
- * @since 2022-07-07
+ * @since 2022-07-09
  */
 @RestController
-@RequestMapping("/book_manage_keshe/book")
-public class BookController {
+@RequestMapping("/book_manage_keshe/category")
+public class CategoryController {
 
     @Autowired
-    private BookService bookService;
+    private CategoryService categoryService;
 
-    @GetMapping("/get_by_catgory_id")
-    public R getByCategoryId(String categoryId){
-        List<Book> bookList = bookService.getByCategoryId(categoryId);
-        return R.ok().data("rows",bookList);
+    @GetMapping("get_all_category")
+    public R getAllCategory(){
+        return R.ok().data("rows",categoryService.list());
     }
 }
 

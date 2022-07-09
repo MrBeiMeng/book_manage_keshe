@@ -1,6 +1,7 @@
 package club.beimeng.book_manage_keshe.service;
 
 import club.beimeng.book_manage_keshe.entity.Book;
+import club.beimeng.book_manage_keshe.entity.Category;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -11,9 +12,9 @@ import java.util.List;
  * </p>
  *
  * @author 蔡济声
- * @since 2022-07-07
+ * @since 2022-07-09
  */
-public interface BookService extends IService<Book> {
+public interface CategoryService extends IService<Category> {
 
-    List<Book> getByCategoryId(String categoryId);
+
 }

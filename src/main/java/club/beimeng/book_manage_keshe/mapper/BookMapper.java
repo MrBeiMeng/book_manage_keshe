@@ -2,6 +2,9 @@ package club.beimeng.book_manage_keshe.mapper;
 
 import club.beimeng.book_manage_keshe.entity.Book;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * <p>
@@ -11,6 +14,9 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author 蔡济声
  * @since 2022-07-07
  */
+
+
 public interface BookMapper extends BaseMapper<Book> {
 
+    List<Book> getByCategoryId(String categoryId);
 }

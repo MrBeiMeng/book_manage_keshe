@@ -65,11 +65,17 @@ public class AuthController {
 
     @GetMapping("get_verify_code")
     public R getVerifyCode(String toEmail) {
+
+        //判断是否是邮箱
+        if (!EmailUtils.isEmail(toEmail)) {
+            toEmail = userService.getByUsername(toEmail).getEmail();
+        }
+
         //拿到验证码
         String verifyCode = verifyCodeService.getCode(toEmail);
         // 检验toEmail 合法性
         emailService.sendSimpleMail("1192384722@qq.com", toEmail, "请查收您的验证码", verifyCode);
-        return R.ok().message("发送成功");
+        return R.ok().message("发送成功").data("emailNumber",EmailUtils.blur(toEmail));
     }
 
     @PostMapping("register")

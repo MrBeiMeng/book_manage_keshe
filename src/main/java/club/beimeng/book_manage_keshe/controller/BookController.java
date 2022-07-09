@@ -27,7 +27,7 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping("/get_by_catgory_id")
+    @GetMapping("/get_by_category_id")
     public R getByCategoryId(String categoryId){
         List<Book> bookList = bookService.getByCategoryId(categoryId);
         return R.ok().data("rows",bookList);

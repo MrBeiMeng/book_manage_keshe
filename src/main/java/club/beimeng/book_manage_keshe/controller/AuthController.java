@@ -42,20 +42,12 @@ public class AuthController {
     private VerifyCodeService verifyCodeService;
 
     @PostMapping("login")
-    public R login(LoginForm loginForm) {
+    public R login(@RequestBody LoginForm loginForm) {
         User user = EmailUtils.isEmail(loginForm.getUsername()) ?
                 userService.getByEmail(loginForm.getUsername()) :
                 userService.getByUsername(loginForm.getUsername());
 
-        /*if (EmailUtils.isEmail(loginForm.getUsername())) {
-            // 传入的是邮箱
-            user = userService.getByEmail(loginForm.getUsername());
-        } else {
-            // 传入的是账号
-            user = userService.getByUsername(loginForm.getUsername());
-        }*/
-
-        if (!userService.verifyUser(loginForm.getUsername(), loginForm.getPassword())) {
+        if (!userService.verifyUser(user.getUsername(), loginForm.getPassword())) {
             return R.error().message("账号或密码错误.");
         }
 
@@ -76,7 +68,7 @@ public class AuthController {
         //拿到验证码
         String verifyCode = verifyCodeService.getCode(toEmail);
         // 检验toEmail 合法性
-        emailService.sendSimpleMail("1192384722@qq.com", toEmail, "测试邮件", verifyCode);
+        emailService.sendSimpleMail("1192384722@qq.com", toEmail, "请查收您的验证码", verifyCode);
         return R.ok().message("发送成功");
     }
 

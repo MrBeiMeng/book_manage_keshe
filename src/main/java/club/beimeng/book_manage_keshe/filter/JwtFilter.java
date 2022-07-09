@@ -35,7 +35,9 @@ public class JwtFilter extends AccessControlFilter {
     protected boolean isAccessAllowed(ServletRequest servletRequest, ServletResponse servletResponse, Object o) throws Exception {
         String jwt = ((HttpServletRequest) servletRequest).getHeader("Authorization");
         if(jwt != null){
-            jwt = jwt.split("Bearer ")[1];
+            if(jwt.contains("Bearer ")){
+                jwt = jwt.split("Bearer ")[1];
+            }
             JwtToken jwtToken = new JwtToken(jwt);
             //这里getSubject方法实际上就是获得一个subject
             //与原生shiro不同的地方在于没有对username和password进行封装

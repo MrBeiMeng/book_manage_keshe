@@ -1,22 +1,143 @@
 <template>
   <div class="home">
     <b-header/>
-    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
-      <svg t="1657250885147" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2297" width="200" height="200"><path d="M277.333333 1002.666667c-83.2 0-149.333333-66.133333-149.333333-149.333334V170.666667c0-83.2 66.133333-149.333333 149.333333-149.333334h576c23.466667 0 42.666667 19.2 42.666667 42.666667v896c0 23.466667-19.2 42.666667-42.666667 42.666667H277.333333z m0-213.333334c-36.266667 0-64 27.733333-64 64s27.733333 64 64 64h533.333334v-128H277.333333zM213.333333 170.666667v548.266666c19.2-10.666667 40.533333-14.933333 64-14.933333h533.333334V106.666667H277.333333c-36.266667 0-64 27.733333-64 64z" fill="#1296db" p-id="2298"></path><path d="M362.666667 320h298.666666c23.466667 0 42.666667-19.2 42.666667-42.666667s-19.2-42.666667-42.666667-42.666666H362.666667c-23.466667 0-42.666667 19.2-42.666667 42.666666s19.2 42.666667 42.666667 42.666667M362.666667 469.333333h170.666666c23.466667 0 42.666667-19.2 42.666667-42.666666s-19.2-42.666667-42.666667-42.666667h-170.666666c-23.466667 0-42.666667 19.2-42.666667 42.666667s19.2 42.666667 42.666667 42.666666" fill="#1296db" p-id="2299"></path></svg>
-    </svg>
+
+    <div style=" ">
+      <div style="height: 500px;background: yellowgreen;border-radius: 10px" class="b-container">
+        <div>
+          收
+        </div>
+        <Barrage :data='barrageData' style="height: 500px">
+          <template #default='data'>
+            <div>自定义弹幕 {{ data.text }}</div>
+          </template>
+        </Barrage>
+      </div>
+    </div>
+
+    <div style="margin: 30px auto;border-radius: 10px" class="b-container" >
+      <div style="text-align:left;position:relative; margin-left: 20px;padding-top:10px;margin-bottom: 20px" class="my-weight-font">
+        <span style="font-size: 23px;font-weight:bolder;">图书 • 分类</span> <span style="margin-left: 15px;font-size: 12px;font-weight: bold">CATEGORY • BOOK</span>
+      </div>
+
+
+
+      <div style="display: flex;justify-content: center;align-items: center;margin-bottom: 20px">
+        <div style="display: inline-block;height: 120px;width: 300px;margin-right: 20px;border-right: black 2px solid;">
+          <div style="top: 50%;position: relative;transform: translateY(-50%);" class="my-weight-font">
+            <div style="font-size: 22px;font-weight: bold">想象文学</div>
+            <div>狂风卷积着乌云~</div>
+          </div>
+        </div>
+        <div style="display: inline-block;">
+          <div style="display: flex">
+            <book-type type-name="小说"/>
+            <book-type type-name="诗歌"/>
+            <book-type type-name="散文"/>
+            <book-type type-name=""/>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex;justify-content: center;align-items: center;margin-bottom: 20px">
+        <div style="display: inline-block;height: 120px;width: 300px;margin-right: 20px;border-right: black 2px solid;">
+          <div style="top: 50%;position: relative;transform: translateY(-50%);" class="my-weight-font">
+            <div style="font-size: 22px;font-weight: bold">知识类</div>
+            <div>狂风卷积着乌云~</div>
+          </div>
+        </div>
+        <div style="display: inline-block;">
+          <div style="display: flex">
+            <book-type type-name="理论性书籍"/>
+            <book-type type-name="实用性书籍"/>
+            <book-type type-name=""/>
+            <book-type type-name=""/>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex;justify-content: center;align-items: center;margin-bottom: 20px">
+        <div style="display: inline-block;height: 120px;width: 300px;margin-right: 20px;border-right: black 2px solid;">
+          <div style="top: 50%;position: relative;transform: translateY(-50%);" class="my-weight-font">
+            <div style="font-size: 22px;font-weight: bold">资讯类</div>
+            <div>狂风卷积着乌云~</div>
+          </div>
+        </div>
+        <div style="display: inline-block;">
+          <div style="display: flex">
+            <book-type type-name="杂志"/>
+            <book-type type-name="报刊"/>
+            <book-type type-name=""/>
+            <book-type type-name=""/>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex;justify-content: center;align-items: center;margin-bottom: 20px">
+        <div style="display: inline-block;height: 120px;width: 300px;margin-right: 20px;border-right: black 2px solid;">
+          <div style="top: 50%;position: relative;transform: translateY(-50%);" class="my-weight-font">
+            <div style="font-size: 22px;font-weight: bold">其他</div>
+            <div>博观而约取，厚积而薄发。</div>
+          </div>
+        </div>
+        <div style="display: inline-block;">
+          <div style="display: flex">
+            <book-type type-name="人物传记"/>
+            <book-type type-name="工具书"/>
+            <book-type type-name=""/>
+            <book-type type-name=""/>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex;justify-content: center;align-items: center;margin-bottom: 20px">
+        <div style="display: inline-block;height: 120px;width: 300px;margin-right: 20px;border-right: black 2px solid;">
+          <div style="top: 50%;position: relative;transform: translateY(-50%);" class="my-weight-font">
+            <div style="font-size: 22px;font-weight: bold">按篇幅</div>
+            <div>博观而约取，厚积而薄发。</div>
+          </div>
+        </div>
+        <div style="display: inline-block;">
+          <div style="display: flex">
+            <book-type type-name="一万"/>
+            <book-type type-name="三万"/>
+            <book-type type-name="十万"/>
+            <book-type type-name=""/>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <b-footer/>
+
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
-import BHeader from "@/components/layout/BHeader";
+import BHeader from "@/components/layout/BHeader"
+import BookType from "@/components/BookType";
+import BFooter from "@/components/layout/BFooter";
 
 export default {
   name: 'HomeView',
   components: {
+    BFooter,
     BHeader,
-    HelloWorld
-  }
+    HelloWorld,
+    BookType,
+  },
+  data() {
+    return {
+      barrageData: [
+        { text: '第一条弹幕' },
+        { text: 'text2' },
+        { text: 'text3' },
+      ]
+    }
+  },
 }
 </script>

@@ -16,9 +16,9 @@
         <!--        导航列表-->
         <div style="float: right;">
           <nav>
-            <router-link to="/plan" >计划</router-link> |
-            <router-link to="/schedule" >日程</router-link> |
-            <router-link to="/about" >关于</router-link>
+            <router-link to="/plan" >搜书</router-link> |
+            <router-link to="/schedule" >分类</router-link> |
+            <router-link to="/about" >推荐</router-link>
           </nav>
           <div style="display: inline-block;margin: 0 20px">
             <nav>
@@ -35,7 +35,12 @@
 
 <script>
 export default {
-  name: 'BHeader'
+  name: 'BHeader',
+  data(){
+    return {
+      input2:null
+    }
+  }
 }
 </script>
 

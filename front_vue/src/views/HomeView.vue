@@ -1,22 +1,94 @@
 <template>
   <div class="home">
     <b-header/>
-    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
-      <svg t="1657250885147" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2297" width="200" height="200"><path d="M277.333333 1002.666667c-83.2 0-149.333333-66.133333-149.333333-149.333334V170.666667c0-83.2 66.133333-149.333333 149.333333-149.333334h576c23.466667 0 42.666667 19.2 42.666667 42.666667v896c0 23.466667-19.2 42.666667-42.666667 42.666667H277.333333z m0-213.333334c-36.266667 0-64 27.733333-64 64s27.733333 64 64 64h533.333334v-128H277.333333zM213.333333 170.666667v548.266666c19.2-10.666667 40.533333-14.933333 64-14.933333h533.333334V106.666667H277.333333c-36.266667 0-64 27.733333-64 64z" fill="#1296db" p-id="2298"></path><path d="M362.666667 320h298.666666c23.466667 0 42.666667-19.2 42.666667-42.666667s-19.2-42.666667-42.666667-42.666666H362.666667c-23.466667 0-42.666667 19.2-42.666667 42.666666s19.2 42.666667 42.666667 42.666667M362.666667 469.333333h170.666666c23.466667 0 42.666667-19.2 42.666667-42.666666s-19.2-42.666667-42.666667-42.666667h-170.666666c-23.466667 0-42.666667 19.2-42.666667 42.666667s19.2 42.666667 42.666667 42.666666" fill="#1296db" p-id="2299"></path></svg>
-    </svg>
+
+    <div style=" ">
+      <div style="height: 500px;background: yellowgreen;border-radius: 10px" class="b-container">
+        <div style="width: 100%;height: 100%;"  class="b-big-back">
+          <Barrage :data='barrageData' style="height: 500px;position:absolute;width: 100%;top: 0">
+            <template #default='data'>
+              <div>自定义弹幕 {{ data.text }}</div>
+            </template>
+          </Barrage>
+          <div style="position:relative;top: 50%;left:50%;transform: translateY(-50%) translateX(-50%);width: 600px">
+            <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
+              <el-select clearable v-model="select" slot="prepend" placeholder="请选择类别" style="width: 130px">
+                <el-option label="查书名" value="1"></el-option>
+                <el-option label="查句子" value="2"></el-option>
+                <el-option label="查作者" value="3"></el-option>
+              </el-select>
+              <el-button slot="append" icon="el-icon-search"></el-button>
+            </el-input>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <book-category/>
+
+    <book-recommend/>
+
+    <!--  回到顶部  -->
+    <el-backtop  :bottom="100">
+      <div
+        style="{
+        height: 100%;
+        width: 100%;
+        background-color: #f2f5f6;
+        box-shadow: 0 0 6px rgba(0,0,0, .12);
+        text-align: center;
+        line-height: 40px;
+        color: #1989fa;
+      }"
+      >
+        顶
+      </div>
+    </el-backtop>
+
+    <b-footer/>
+
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
-import BHeader from "@/components/layout/BHeader";
+import BHeader from "@/components/layout/BHeader"
+import BookType from "@/components/BookType";
+import BFooter from "@/components/layout/BFooter";
+import BookCategory from "@/components/BookCategory";
+import BookRecommend from "@/components/BookRecommend";
 
 export default {
   name: 'HomeView',
   components: {
+    BookRecommend,
+    BookCategory,
+    BFooter,
     BHeader,
-    HelloWorld
-  }
+    HelloWorld,
+    BookType,
+  },
+  data() {
+    return {
+      barrageData: [
+        { text: '第一条弹幕' },
+        { text: 'text2' },
+        { text: 'text3' },
+      ],
+      select:null,
+      input3:null
+    }
+  },
 }
 </script>
+<style scoped>
+
+.b-big-back{
+  background-image: url("../assets/image/阿尔卑斯山风景4k高清壁纸3840x2160_彼岸图网.jpg");
+  background-size: 1680px;
+  background-position: 0 -162px;
+  border-radius: 10px;
+}
+</style>

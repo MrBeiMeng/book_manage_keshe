@@ -8,8 +8,13 @@ import '@/assets/style/mystyle.css'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
+import Barrage from 'vue-custom-barrage';
+
+import '@/permission' // permission control
+
 Vue.config.productionTip = false
 
+Vue.use(Barrage)
 Vue.use(ElementUI);
 
 new Vue({

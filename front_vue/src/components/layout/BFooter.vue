@@ -1,7 +1,7 @@
 <template>
 <div style="width: 100%;background: rgb(84 92 100 / 58%);">
   <div style="text-align: center;padding: 20px">
-    好用请点个免费的star 👻🥰
+    去这里看github  👻🥰
     <div style="display: inline-block;">
 
       <el-button size="mini" type="primary" @click="toGitHub ">

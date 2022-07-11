@@ -19,4 +19,6 @@ import java.util.List;
 public interface BookMapper extends BaseMapper<Book> {
 
     List<Book> getByCategoryId(String categoryId);
+
+    List<Book> recommendBook(int nums);
 }

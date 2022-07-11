@@ -3,9 +3,14 @@
 <mapper namespace="club.beimeng.book_manage_keshe.mapper.BookMapper">
 
     <select id="getByCategoryId" resultType="club.beimeng.book_manage_keshe.entity.Book" parameterType="String">
-        select id, category_id, book_name, content, author, publisher, publish_date, unit_price, img_url, summary, all_num, tags, last_num, times, status, sort, deleted, create_time, update_time
+        select id, book_name, content, author, publisher, publish_date, unit_price, img_url, summary, all_num, tags, last_num, times, status, sort, deleted, create_time, update_time
         from book
         where id in
               (select book_id from book_category where category_id = #{categoryId})
+    </select>
+
+    <select id="recommendBook" resultType="club.beimeng.book_manage_keshe.entity.Book" parameterType="int">
+    select id, book_name, content, author, publisher, publish_date, unit_price, img_url, summary, all_num, tags, last_num, times, status, sort, deleted, create_time, update_time
+    from book order by sort,update_time limit #{id}
     </select>
 </mapper>

@@ -16,4 +16,8 @@ import java.util.List;
 public interface BookService extends IService<Book> {
 
     List<Book> getByCategoryId(String categoryId);
+
+    List<Book> recommendBook(int nums);
+
+    List<Book> searchBook(String book_name, String content, String author);
 }

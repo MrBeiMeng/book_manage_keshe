@@ -18,14 +18,19 @@
           <nav>
             <router-link to="/plan" >搜书</router-link> |
             <router-link to="/schedule" >分类</router-link> |
-            <router-link to="/about" >推荐</router-link>
+            <router-link to="/about" >推荐</router-link> |
+            <router-link to="/about" >我的</router-link>
           </nav>
           <div style="display: inline-block;margin: 0 20px">
-            <nav>
+            <div v-if="isLogin">
+              <el-avatar shape="square" :size="50" :src="avatar" style="position:relative;transform: translateY(17px);padding: 0"></el-avatar>
+            </div>
+            <nav v-else>
               <router-link to="/login" >登录/</router-link>
               <router-link to="/register" >注册</router-link>
             </nav>
           </div>
+
         </div>
       </div>
     </div>
@@ -38,7 +43,16 @@ export default {
   name: 'BHeader',
   data(){
     return {
-      input2:null
+      input2:null,
+
+    }
+  },
+  computed:{
+    isLogin(){
+      return this.$store.getters.token !== null;
+    },
+    avatar(){
+      return this.$store.getters.avatar
     }
   }
 }

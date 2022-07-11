@@ -10,6 +10,8 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 import Barrage from 'vue-custom-barrage';
 
+import '@/permission' // permission control
+
 Vue.config.productionTip = false
 
 Vue.use(Barrage)

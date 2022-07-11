@@ -19,17 +19,15 @@ export function login(loginForm) {
 
 export function logout(username) {
   return request({
-    url: '/auth/get_verify_code',
-    method: 'get',
-    params: { username }
+    url: '/auth/logout',
+    method: 'post',
   })
 }
 
-export function getInfo(username) {
+export function getInfo() {
   return request({
-    url: '/auth/get_verify_code',
+    url: '/auth/get_info',
     method: 'get',
-    params: { username }
   })
 }
 

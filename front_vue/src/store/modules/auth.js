@@ -51,22 +51,21 @@ const actions = {
   // get users info
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
-      getInfo(state.token).then(response => {
+      getInfo().then(response => {
         console.log("好事多磨")
         const { data } = response
 
         if (!data) {
           reject('Verification failed, please Login again.')
         }
-        // todo
-        const { menuList, name, avatar } = data
+        const { roles, name, avatar } = data
 
         // roles must be a non-empty array
-        if (!menuList || menuList.length <= 0) {
+        if (!roles || roles.length <= 0) {
           reject('getInfo: roles must be a non-null array!')
         }
 
-        commit('SET_ROLES', menuList)
+        commit('SET_ROLES', roles)
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
         resolve(data)

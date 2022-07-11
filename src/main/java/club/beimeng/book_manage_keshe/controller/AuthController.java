@@ -101,6 +101,8 @@ public class AuthController {
         String principal = (String) subject.getPrincipal();
         String username = JwtUtils.getUsername(principal);
         User user = userService.getByUsername(username);
-        return R.ok().data("rows", user);
+
+        // const { roles, name, avatar } = data 前端需要至少这三个信息
+        return R.ok().data("roles", user.getRole()).data("name",user.getRealName()).data("avatar",user.getAvatar()).data("userDetail",user);
     }
 }

@@ -13,7 +13,7 @@ import java.util.UUID;
 
 public class JwtUtils {
 
-    private static final long EXPIRE_TIME = 60 * 60 * 1000;
+    private static final long EXPIRE_TIME = 1000 * 60 * 60 * 24 * 7; // 一周过期
     private static final String secret = "yRdhcn5A00paqRWpVL";
 
     /**

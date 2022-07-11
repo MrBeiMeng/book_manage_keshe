@@ -16,10 +16,10 @@
         <!--        导航列表-->
         <div style="float: right;">
           <nav>
-            <router-link to="/plan" >搜书</router-link> |
-            <router-link to="/schedule" >分类</router-link> |
-            <router-link to="/about" >推荐</router-link> |
-            <router-link to="/about" >我的</router-link>
+            <a href=""  @click.stop.prevent = "scrollTo(0)">搜书</a> |
+            <a href=""  @click.stop.prevent = "scrollTo(1)">分类</a> |
+            <a href=""  @click.stop.prevent = "scrollTo(2)">推荐</a> |
+            <router-link to="/me" >我的</router-link>
           </nav>
           <div style="display: inline-block;margin: 0 20px">
             <div v-if="isLogin">
@@ -47,14 +47,25 @@ export default {
 
     }
   },
+  methods:{
+    scrollTo(to){
+      let arr = [100,600,1200]
+
+      window.scrollTo({
+        top: arr[to],
+        behavior: "smooth"
+      });
+    }
+  },
   computed:{
     isLogin(){
-      return this.$store.getters.token !== null;
+      return this.$store.getters.token !== undefined;
     },
     avatar(){
       return this.$store.getters.avatar
     }
-  }
+  },
+
 }
 </script>
 

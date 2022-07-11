@@ -62,7 +62,7 @@
 
         <div>
           <el-link type="info" style="float: left;padding-top: 12px;margin-left: 10px" @click="toLogin">我要登录</el-link>
-          <el-button type="primary" size="small" style="float: right">LOGIN</el-button>
+          <el-button type="primary" size="small" style="float: right">注册</el-button>
         </div>
 
       </div>

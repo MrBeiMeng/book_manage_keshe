@@ -28,7 +28,7 @@
       <div style="display: inline-block;height: 120px;width: 300px;margin-right: 20px;border-right: black 2px solid;">
         <div style="top: 50%;position: relative;transform: translateY(-50%);" class="my-weight-font">
           <div style="font-size: 22px;font-weight: bold">知识类</div>
-          <div>狂风卷积着乌云~</div>
+          <div>Java 从入门到精通~</div>
         </div>
       </div>
       <div style="display: inline-block;">
@@ -45,7 +45,7 @@
       <div style="display: inline-block;height: 120px;width: 300px;margin-right: 20px;border-right: black 2px solid;">
         <div style="top: 50%;position: relative;transform: translateY(-50%);" class="my-weight-font">
           <div style="font-size: 22px;font-weight: bold">资讯类</div>
-          <div>狂风卷积着乌云~</div>
+          <div>观天下~</div>
         </div>
       </div>
       <div style="display: inline-block;">
@@ -62,7 +62,7 @@
       <div style="display: inline-block;height: 120px;width: 300px;margin-right: 20px;border-right: black 2px solid;">
         <div style="top: 50%;position: relative;transform: translateY(-50%);" class="my-weight-font">
           <div style="font-size: 22px;font-weight: bold">其他</div>
-          <div>博观而约取，厚积而薄发。</div>
+          <div>学无止境。</div>
         </div>
       </div>
       <div style="display: inline-block;">
@@ -102,7 +102,9 @@ export default {
     bookType
   },
   data(){
+    return{
 
+    }
   }
 }
 </script>

@@ -6,11 +6,7 @@ import club.beimeng.book_manage_keshe.entity.form.SearchForm;
 import club.beimeng.book_manage_keshe.service.BookService;
 import club.beimeng.book_manage_keshe.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -44,6 +40,18 @@ public class BookController {
     public R updateBookById(Book book) {
         bookService.updateById(book);
         return R.ok().message("更新成功");
+    }
+
+    @PostMapping("save_book")
+    public R saveBook(Book book){
+        bookService.save(book);
+        return R.ok().message("保存成功");
+    }
+
+    @DeleteMapping("delete_book")
+    public R deleteBook(int id){
+        bookService.removeById(id);
+        return R.ok().message("删除成功");
     }
 
     @GetMapping("recommend_book")

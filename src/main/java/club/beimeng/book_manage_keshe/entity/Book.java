@@ -28,6 +28,7 @@ public class Book implements Serializable {
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;
 
+    @ApiModelProperty(value = "图书名称")
     private String bookName;
 
     @ApiModelProperty(value = "经典台词")
@@ -36,10 +37,13 @@ public class Book implements Serializable {
     @ApiModelProperty(value = "内容")
     private String content;
 
+    @ApiModelProperty(value = "作者")
     private String author;
 
+    @ApiModelProperty(value = "出版社")
     private String publisher;
 
+    @ApiModelProperty(value = "出版日期")
     private Date publishDate;
 
     @ApiModelProperty(value = "单价")
@@ -72,8 +76,10 @@ public class Book implements Serializable {
     @ApiModelProperty(value = "删除状态(1代表未删除,2代表删除)")
     private Integer deleted;
 
+    @ApiModelProperty(value = "创建时间")
     private Date createTime;
 
+    @ApiModelProperty(value = "更新时间")
     private Date updateTime;
 
 

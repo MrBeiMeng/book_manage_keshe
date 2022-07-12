@@ -12,6 +12,8 @@ import club.beimeng.book_manage_keshe.utils.JwtUtils;
 import club.beimeng.book_manage_keshe.utils.R;
 import club.beimeng.book_manage_keshe.utils.SaltUtils;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import net.bytebuddy.asm.Advice;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.Md5Hash;
@@ -27,7 +29,7 @@ import org.springframework.web.bind.annotation.*;
  * @author 包龙
  * @since 2022-07-06
  */
-@Api
+@Api("验证相关controller")
 @RestController
 @RequestMapping("/book_manage_keshe/auth")
 public class AuthController {
@@ -41,8 +43,9 @@ public class AuthController {
     @Autowired
     private VerifyCodeService verifyCodeService;
 
+    @ApiOperation("用户认证登录方法")
     @PostMapping("login")
-    public R login(@RequestBody LoginForm loginForm) {
+    public R login(@RequestBody @ApiParam("登录表单,其中loginForm.username 可以是email 也可以是用户名") LoginForm loginForm) {
         User user = EmailUtils.isEmail(loginForm.getUsername()) ?
                 userService.getByEmail(loginForm.getUsername()) :
                 userService.getByUsername(loginForm.getUsername());
@@ -63,8 +66,10 @@ public class AuthController {
         return R.ok().data("token", jwtToken);
     }
 
+
+    @ApiOperation("发送验证码controller")
     @GetMapping("get_verify_code")
-    public R getVerifyCode(String toEmail) {
+    public R getVerifyCode(@ApiParam("接收验证码的email/用户名") String toEmail) {
 
         //判断是否是邮箱
         if (!EmailUtils.isEmail(toEmail)) {
@@ -78,8 +83,9 @@ public class AuthController {
         return R.ok().message("发送成功").data("emailNumber",EmailUtils.blur(toEmail));
     }
 
+    @ApiOperation("注册用户controller")
     @PostMapping("register")
-    public R register(@RequestBody LoginForm loginForm) {
+    public R register(@RequestBody @ApiParam("注册表单") LoginForm loginForm) {
         String salt = SaltUtils.getSalt(8);
         // 加密密码
         String encodedPassword = new Md5Hash(loginForm.getPassword(), salt, 21).toHex();
@@ -88,6 +94,7 @@ public class AuthController {
         return R.ok();
     }
 
+    @ApiOperation("退出登录controller")
     @PostMapping("logout")
     public R logout() {
         Subject subject = SecurityUtils.getSubject();
@@ -95,6 +102,7 @@ public class AuthController {
         return R.ok();
     }
 
+    @ApiOperation("获取用户信息controller")
     @GetMapping("get_info")
     public R getUser() {
         Subject subject = SecurityUtils.getSubject();

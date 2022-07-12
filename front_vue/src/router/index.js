@@ -5,6 +5,7 @@ import LoginView from "@/views/LoginView";
 import Register from "@/components/Register";
 import RegisterView from "@/views/RegisterView";
 import MineView from "@/views/MineView";
+import BooksView from "@/views/BooksView";
 
 Vue.use(VueRouter)
 
@@ -28,6 +29,11 @@ const routes = [
     path: '/me',
     name: 'me',
     component: MineView
+  },
+  {
+    path: '/books/:categoryId',
+    name: 'books',
+    component: BooksView
   },
   {
     path: '/about',

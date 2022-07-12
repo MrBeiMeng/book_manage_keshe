@@ -65,6 +65,9 @@ public class ShiroConfig {
         filterRuleMap.put("/v3/**","anon");
         filterRuleMap.put("/static/**", "anon");
 
+        // knife4j 放行
+        filterRuleMap.put("/doc.html", "anon");
+
         filterRuleMap.put("/**","jwt");
         bean.setFilterChainDefinitionMap(filterRuleMap);
         return bean;

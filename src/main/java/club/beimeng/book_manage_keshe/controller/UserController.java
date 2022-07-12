@@ -5,6 +5,7 @@ import club.beimeng.book_manage_keshe.entity.User;
 import club.beimeng.book_manage_keshe.service.UserService;
 import club.beimeng.book_manage_keshe.utils.R;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @ApiOperation("单纯一个测试方法")
     @GetMapping("test")
     public R test(){
         System.out.println("hello world");

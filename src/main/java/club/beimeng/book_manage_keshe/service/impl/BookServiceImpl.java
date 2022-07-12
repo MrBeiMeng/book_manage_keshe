@@ -1,14 +1,17 @@
 package club.beimeng.book_manage_keshe.service.impl;
 
 import club.beimeng.book_manage_keshe.entity.Book;
+import club.beimeng.book_manage_keshe.entity.form.BookForm;
 import club.beimeng.book_manage_keshe.mapper.BookMapper;
 import club.beimeng.book_manage_keshe.service.BookService;
 import club.beimeng.book_manage_keshe.utils.R;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -22,7 +25,7 @@ import java.util.List;
 @Service
 public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements BookService {
 
-    @Autowired
+    @Resource
     private BookMapper bookMapper;
 
     @Override
@@ -49,5 +52,12 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements Bo
             queryWrapper.like("content",content);
         }
         return bookMapper.selectList(queryWrapper);
+    }
+
+    @Override
+    public void saveBookForm(BookForm bookForm) {
+        Book book = new Book();
+        BeanUtils.copyProperties(book,bookForm);
+        save(book);
     }
 }

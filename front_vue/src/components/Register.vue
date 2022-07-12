@@ -83,8 +83,7 @@ export default {
   },
   methods:{
     toLogin(){
-
-      this.$router.push('/login')
+      this.$router.replace('/login')
     }
   }
 }

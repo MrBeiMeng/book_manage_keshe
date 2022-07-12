@@ -17,7 +17,7 @@ export function login(loginForm) {
   })
 }
 
-export function logout(username) {
+export function logout() {
   return request({
     url: '/auth/logout',
     method: 'post',

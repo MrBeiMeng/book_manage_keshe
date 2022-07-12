@@ -30,6 +30,9 @@ public class Book implements Serializable {
 
     private String bookName;
 
+    @ApiModelProperty(value = "经典台词")
+    private String sentences;
+
     @ApiModelProperty(value = "内容")
     private String content;
 

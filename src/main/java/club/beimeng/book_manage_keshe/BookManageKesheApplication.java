@@ -7,7 +7,7 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
 
 @EnableOpenApi // 开启swagger
 @SpringBootApplication
-@MapperScan("club.beimeng.book_manage_keshe.mapper")
+//@MapperScan("club.beimeng.book_manage_keshe.mapper")
 public class BookManageKesheApplication {
 
     public static void main(String[] args) {

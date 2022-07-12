@@ -15,7 +15,7 @@ import java.util.List;
  * @since 2022-07-07
  */
 
-
+@Mapper
 public interface BookMapper extends BaseMapper<Book> {
 
     List<Book> getByCategoryId(String categoryId);

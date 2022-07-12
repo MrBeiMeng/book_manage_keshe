@@ -5,27 +5,27 @@
     </div>
 
     <div style="display: flex;justify-content: left;margin: 30px 40px;padding-bottom: 45px">
-      <div style="border: black 1px solid;width: 300px;height: 227px;border-radius: 10px;margin: 0 10px" v-for="item in 5" :key="item">
+      <div style="border: black 1px solid;width: 300px;height: 227px;border-radius: 10px;margin: 0 10px" v-for="(item,index) in recommendBookList" :key="item">
         <div style="width: 100%;height: 160px;overflow: hidden;position: relative;text-align: center;background-image: url('../assets/image/西部牛仔.jpg')" class="b-back">
           <div style="top: 50%;position: absolute;transform: translateY(-50%);color: white;font-weight: bolder;filter: blur(0.5px)">
-            获得前程是由于自己的勇往直前，仅仅由于自己的勇往直前。
+            {{item.sentences}}
           </div>
           <div style="width: 300px;">
-            <img src="../assets/image/西部牛仔.jpg" alt="" style="width: 100%;">
+            <img :src="item.imgUrl" alt="" style="width: 100%;">
           </div>
         </div>
 
         <div style="position: relative">
           <div style="display: inline-block;float: left;margin: 10px;position: relative">
-            <img src="../assets/image/金牌.png" alt="" style="width: 50px">
+            <img :src="medalsList[index]" alt="" style="width: 50px">
           </div>
           <div style="display: inline-block;width: 100px;background: #42b983;border-radius: 10px 10px 10px 30px;padding: 10px;font-weight: bold;float: right;position: relative" class="my-weight-font">
-            三个火枪手
+            {{ item.bookName }}
           </div>
         </div>
         <div style="margin-top: 21px;">
           <div>
-            作者: 大仲马
+            {{ item.author }}
           </div>
         </div>
       </div>
@@ -35,8 +35,27 @@
 </template>
 
 <script>
+import {recommendBook} from "@/api/book";
+
 export default {
-  name: "BookRecommend"
+  name: "BookRecommend",
+  data(){
+    return{
+      recommendBookList:[],
+      medalsList:[
+        'https://ccurj.oss-cn-beijing.aliyuncs.com/%E9%87%91%E7%89%8C.png',
+        'https://ccurj.oss-cn-beijing.aliyuncs.com/%E9%93%B6%E7%89%8C.png',
+        'https://ccurj.oss-cn-beijing.aliyuncs.com/%E9%93%9C%E7%89%8C.png',
+        'https://ccurj.oss-cn-beijing.aliyuncs.com/%E5%A5%96%E7%89%8C.png',
+        'https://ccurj.oss-cn-beijing.aliyuncs.com/%E5%A5%96%E7%89%8C.png',
+      ]
+    }
+  },
+  mounted() {
+    recommendBook(5).then(res=>{
+      this.recommendBookList = res.data.rows
+    })
+  }
 }
 </script>
 

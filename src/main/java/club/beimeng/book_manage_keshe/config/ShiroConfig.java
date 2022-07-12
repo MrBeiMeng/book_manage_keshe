@@ -53,7 +53,9 @@ public class ShiroConfig {
         filterRuleMap.put("/book_manage_keshe/auth/login","anon");
         filterRuleMap.put("/book_manage_keshe/auth/register","anon");
         filterRuleMap.put("/book_manage_keshe/auth/get_verify_code","anon");
-//        filterRuleMap.put("/book_manage_keshe/user/test","anon");
+        // 图书相关
+        filterRuleMap.put("/book_manage_keshe/book/search_book","anon");
+        filterRuleMap.put("/book_manage_keshe/book/recommend_book","anon");
         //放行Swagger2页面，需要放行这些
         filterRuleMap.put("/swagger-ui/index.html","anon");
         filterRuleMap.put("/swagger-ui/*","anon");

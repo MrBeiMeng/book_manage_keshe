@@ -104,7 +104,7 @@ export default {
       })
     },
     toRegister(){
-      this.$router.push('/register')
+      this.$router.replace('/register')
     },
     sendVerifyCode(){
       if (this.loginForm.username.length <= 3){
@@ -115,9 +115,9 @@ export default {
         return;
       }
 
-      getVerifyCode(this.loginForm.username).then(()=>{
+      getVerifyCode(this.loginForm.username).then((res)=>{
         this.$notify({
-          title: '验证码已发送至？？？？',
+          title: res.data.emailNumber,
           message: '如未收到，请检查垃圾箱。',
           offset: 100,
           position: 'bottom-right'

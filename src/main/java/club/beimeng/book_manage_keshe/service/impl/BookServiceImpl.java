@@ -36,11 +36,11 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements Bo
     }
 
     @Override
-    public List<Book> searchBook(String book_name, String content, String author) {
+    public List<Book> searchBook(String bookName, String content, String author) {
         QueryWrapper<Book> queryWrapper = new QueryWrapper<>();
 
-        if (book_name != null){
-            queryWrapper.eq("book_name",book_name);
+        if (bookName != null){
+            queryWrapper.eq("book_name",bookName);
         }
         if (author != null){
             queryWrapper.eq("author",author);

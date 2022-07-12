@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class SearchForm {
-    private String book_name;
+    private String bookName;
     private String content;
     private String author;
 }

@@ -6,11 +6,7 @@ import club.beimeng.book_manage_keshe.entity.form.SearchForm;
 import club.beimeng.book_manage_keshe.service.BookService;
 import club.beimeng.book_manage_keshe.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -47,13 +43,13 @@ public class BookController {
     }
 
     @GetMapping("recommend_book")
-    public R recommendBook(int nums) {
+    public R recommendBook(Integer nums) {
         return R.ok().data("rows", bookService.recommendBook(nums));
     }
 
     @GetMapping("search_book")
-    public R searchBook(String book_name, String content, String author) {
-        List<Book> bookList = bookService.searchBook(book_name,content,author);
+    public R searchBook(SearchForm searchForm) {
+        List<Book> bookList = bookService.searchBook(searchForm.getBookName(),searchForm.getContent(),searchForm.getAuthor());
         return R.ok().data("rows",bookList);
     }
 }

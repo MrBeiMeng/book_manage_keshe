@@ -1,6 +1,7 @@
 package club.beimeng.book_manage_keshe.utils;
 
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -8,17 +9,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Data /*生成get set*/
+@ApiModel("标准结果返回类")
 public class R {
-    @ApiModelProperty(value = "是否成功le")
+    @ApiModelProperty(value = "是否成功")
     private Boolean success;
 
-    @ApiModelProperty(value = "返回de码")
+    @ApiModelProperty(value = "操作结果代码 : 成功： 2000, 失败 2001")
     private Integer code;
 
-    @ApiModelProperty(value = "返回de消息")
+    @ApiModelProperty(value = "返回的message")
     private String message;
 
-    @ApiModelProperty(value = "返回de数据")
+    @ApiModelProperty(value = "返回的数据")
     private Map<String,Object> data = new HashMap<>();
 
     /*把构造方法私有*/

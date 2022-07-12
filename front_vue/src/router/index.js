@@ -6,6 +6,9 @@ import Register from "@/components/Register";
 import RegisterView from "@/views/RegisterView";
 import MineView from "@/views/MineView";
 import BooksView from "@/views/BooksView";
+import SearchesView from "@/views/SearchesView";
+import DetailsView from "@/views/DetailsView";
+import BookManagesView from "@/views/BookManagesView";
 
 Vue.use(VueRouter)
 
@@ -31,9 +34,27 @@ const routes = [
     component: MineView
   },
   {
+    path: '/searches',
+    name: 'searches',
+    component: SearchesView,
+    props:true
+  },
+  {
+    path: '/manage_books',
+    name: 'manage_books',
+    component: BookManagesView,
+  },
+  {
+    path: '/book_detail/:bookId',
+    name: 'book_detail',
+    component: DetailsView,
+    props:true
+  },
+  {
     path: '/books/:categoryId',
     name: 'books',
-    component: BooksView
+    component: BooksView,
+    props: true
   },
   {
     path: '/about',

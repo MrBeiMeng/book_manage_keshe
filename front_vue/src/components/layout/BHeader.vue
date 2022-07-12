@@ -16,6 +16,7 @@
         <!--        导航列表-->
         <div style="float: right;">
           <nav>
+            <router-link to="/" >首页</router-link> |
             <a href=""  @click.stop.prevent = "scrollTo(0)">搜书</a> |
             <a href=""  @click.stop.prevent = "scrollTo(1)">分类</a> |
             <a href=""  @click.stop.prevent = "scrollTo(2)">推荐</a> |

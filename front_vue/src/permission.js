@@ -12,7 +12,9 @@ const whiteList = [ // 地址白名单
   '/login',
   '/',
   '/register',
-  '/books/'
+  '/books',
+  '/searches',
+  '/book_detail'
 ] // no redirect whitelist
 
 router.beforeEach(async(to, from, next) => {
@@ -54,7 +56,7 @@ router.beforeEach(async(to, from, next) => {
     }
   } else {
     /* has no token*/
-    if (whiteList.indexOf(to.path) !== -1 || to.path.indexOf(whiteList[3]) !== -1) {
+    if (whiteList.indexOf(to.path) !== -1 || to.path.indexOf(whiteList[3]) !== -1 || to.path.indexOf(whiteList[5]) !== -1) {
       // in the free login whitelist, go directly
       next()
     } else {

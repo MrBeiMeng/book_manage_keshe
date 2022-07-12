@@ -38,6 +38,19 @@ public class BookController {
         return R.ok().data("rows", bookList);
     }
 
+    @ApiOperation("搜索图书")
+    @GetMapping("search_book")
+    public R searchBook(@ApiParam("搜索图书的参数，可以是用户名,作者，内容") SearchForm searchForm) {
+        List<Book> bookList = bookService.searchBook(searchForm.getBookName(),searchForm.getContent(),searchForm.getAuthor());
+        return R.ok().data("rows",bookList);
+    }
+
+    @ApiOperation("通过id获取图书")
+    @GetMapping("/get_one_book")
+    public R getOneBook(String bookId){
+        return R.ok().data("book",bookService.getById(bookId));
+    }
+
     @ApiOperation("查询所有书籍")
     @GetMapping("get_all_book")
     public R getAllBook() {
@@ -71,11 +84,6 @@ public class BookController {
         return R.ok().data("rows", bookService.recommendBook(nums));
     }
 
-    @ApiOperation("搜索图书")
-    @GetMapping("search_book")
-    public R searchBook(@ApiParam("搜索图书的参数，可以是用户名,作者，内容") SearchForm searchForm) {
-        List<Book> bookList = bookService.searchBook(searchForm.getBookName(),searchForm.getContent(),searchForm.getAuthor());
-        return R.ok().data("rows",bookList);
-    }
+
 }
 

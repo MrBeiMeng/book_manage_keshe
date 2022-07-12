@@ -45,19 +45,18 @@ export default {
       let author = null;
       let content = null;
       switch (this.select){
-        case 1: bookName = this.input3;break;
-        case 2: author = this.input3;break;
-        case 3: content = this.input3;break;
+        case "1": bookName = this.input3;break;
+        case "2": content = this.input3;break;
+        case "3": author = this.input3;break;
         default : bookName = this.input3;
       }
 
-      let searchForm = {
-        bookName,author,content
-      }
-
-      searchBook(searchForm).then(res =>{
-        console.log(res.data.rows)
-      })
+      console.log("bookName",bookName)
+      console.log("author",author)
+      console.log("content",content)
+      this.$router.push({ path:'/searches', query: {
+          bookName,author,content
+        } })
     }
   }
 }

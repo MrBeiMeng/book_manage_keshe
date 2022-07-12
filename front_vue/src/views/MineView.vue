@@ -20,6 +20,14 @@
         <el-button type="danger" @click="logout">LOGOUT</el-button>
       </div>
     </div>
+
+  </div>
+  <div style="margin-top: 50px">
+    <h1>您好，尊敬的管理员</h1>
+    <nav>
+      <router-link to="/manage_books">管理图书</router-link>
+      <!--        <router-link to="/"></router-link>-->
+    </nav>
   </div>
 
 </div>

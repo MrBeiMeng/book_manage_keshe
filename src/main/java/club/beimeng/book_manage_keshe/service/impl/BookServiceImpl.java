@@ -51,6 +51,7 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements Bo
         if (content != null){
             queryWrapper.like("content",content);
         }
+        queryWrapper.eq("status" ,2);
         return bookMapper.selectList(queryWrapper);
     }
 

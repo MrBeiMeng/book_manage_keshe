@@ -13,8 +13,30 @@ export function searchBook(searchForm) {
   return request({
     url: '/book/search_book',
     method: 'get',
-    params: {searchForm}
+    params: searchForm
+  })
+}
+
+export function getBook(bookId) {
+  return request({
+    url: '/book/get_one_book',
+    method: 'get',
+    params: {bookId}
+  })
+}
+
+export function getByCategoryId(categoryId) {
+  return request({
+    url: '/book/get_by_category_id',
+    method: 'get',
+    params: {categoryId}
   })
 }
 
 
+export function getAllBook() {
+  return request({
+    url: '/book/get_all_book',
+    method: 'get',
+  })
+}

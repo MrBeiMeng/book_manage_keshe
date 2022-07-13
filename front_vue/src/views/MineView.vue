@@ -22,10 +22,14 @@
     </div>
 
   </div>
-  <div style="margin-top: 50px">
+  <div style="margin-top: 50px" v-if="$store.getters.roles == 'admin'">
     <h1>您好，尊敬的管理员</h1>
     <nav>
       <router-link to="/manage_books">管理图书</router-link>
+      <br>
+      <router-link to="/manage_users">管理用户</router-link>
+      <br>
+      <router-link to="/manage_books">管理申请</router-link>
       <!--        <router-link to="/"></router-link>-->
     </nav>
   </div>

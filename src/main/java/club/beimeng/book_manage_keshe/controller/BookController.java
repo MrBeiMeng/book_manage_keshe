@@ -14,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -85,9 +86,16 @@ public class BookController {
     }
 
     @ApiOperation("删除图书")
-    @DeleteMapping("delete_book")
+    @DeleteMapping("delete_book_by_id")
     public R deleteBook(@ApiParam("删除图书的编号") int id){
         bookService.removeById(id);
+        return R.ok().message("删除成功");
+    }
+
+    @ApiOperation("删除图书")
+    @PostMapping("delete_these_books")
+    public R deleteBook(@ApiParam("删除图书的编号") @RequestBody ArrayList<String> ids){
+        bookService.removeByIds(ids);
         return R.ok().message("删除成功");
     }
 

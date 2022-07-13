@@ -22,45 +22,45 @@
           width="180">
         </el-table-column>
         <el-table-column
-          prop="bookName"
-          label="书名"
+          prop="username"
+          label="用户名"
           width="180">
         </el-table-column>
         <el-table-column
-          prop="author"
-          label="作者">
+          prop="password"
+          label="密码">
         </el-table-column>
         <el-table-column
-          prop="publisher"
-          label="出版社">
+          prop="salt"
+          label="盐">
         </el-table-column>
         <el-table-column
-          prop="publishDate"
-          label="出版日期">
+          prop="role"
+          label="角色">
         </el-table-column>
         <el-table-column
-          prop="unitPrice"
-          label="单价">
-        </el-table-column>
-<!--        <el-table-column-->
-<!--          prop="imgUrl"-->
-<!--          label="封面">-->
-<!--        </el-table-column>-->
-        <el-table-column
-          prop="allNum"
-          label="总数">
+          prop="realName"
+          label="真实名">
         </el-table-column>
         <el-table-column
-          prop="tags"
-          label="标签">
+          prop="email"
+          label="邮箱账号">
         </el-table-column>
         <el-table-column
-          prop="lastNum"
-          label="库存剩余">
+          prop="sex"
+          label="性别">
         </el-table-column>
         <el-table-column
-          prop="times"
-          label="借阅次数">
+          prop="age"
+          label="年龄">
+        </el-table-column>
+        <el-table-column
+          prop="description"
+          label="个人介绍">
+        </el-table-column>
+        <el-table-column
+          prop="avatar"
+          label="头像">
         </el-table-column>
         <el-table-column
           label="操作">
@@ -78,73 +78,91 @@
         :before-close="handleClose">
          <div style="">
            <div>
-             书名：
+             用户名：
              <el-input
                placeholder="请输入内容"
-               v-model="addOrUpdateBook.bookName"
+               v-model="addOrUpdateUser.username"
                style="width: 200px"
                clearable>
              </el-input>
            </div>
            <div>
-             作者：
+             密码：
              <el-input
                placeholder="请输入内容"
-               v-model="addOrUpdateBook.author"
+               v-model="addOrUpdateUser.password"
                style="width: 200px"
                clearable>
              </el-input>
            </div>
            <div>
-             出版社：
+             盐：
              <el-input
                placeholder="请输入内容"
-               v-model="addOrUpdateBook.publisher"
+               v-model="addOrUpdateUser.salt"
                style="width: 200px"
                clearable>
              </el-input>
            </div>
            <div>
-             出版时间：
+             角色：
              <el-input
                placeholder="请输入内容"
-               v-model="addOrUpdateBook.publishDate"
+               v-model="addOrUpdateUser.role"
                style="width: 200px"
                clearable>
              </el-input>
            </div>
            <div>
-             单价：
+             真实名：
              <el-input
                placeholder="请输入内容"
-               v-model="addOrUpdateBook.unitPrice"
+               v-model="addOrUpdateUser.realName"
                style="width: 200px"
                clearable>
              </el-input>
            </div>
            <div>
-             图片：
+             邮箱账号：
              <el-input
                placeholder="请输入内容"
-               v-model="addOrUpdateBook.imgUrl"
+               v-model="addOrUpdateUser.email"
                style="width: 200px"
                clearable>
              </el-input>
            </div>
            <div>
-             标签：
+             性别：
              <el-input
                placeholder="请输入内容"
-               v-model="addOrUpdateBook.tags"
+               v-model="addOrUpdateUser.sex"
                style="width: 200px"
                clearable>
              </el-input>
            </div>
            <div>
-             剩余数量：
+             年龄：
              <el-input
                placeholder="请输入内容"
-               v-model="addOrUpdateBook.lastNum"
+               v-model="addOrUpdateUser.age"
+               style="width: 200px"
+               clearable>
+             </el-input>
+           </div>
+           <div>
+             个人介绍：
+             <el-input
+               placeholder="请输入内容"
+               v-model="addOrUpdateUser.description"
+               style="width: 200px"
+               clearable>
+             </el-input>
+           </div>
+           <div>
+             头像：
+             <el-input
+               placeholder="请输入内容"
+               v-model="addOrUpdateUser.avatar"
                style="width: 200px"
                clearable>
              </el-input>
@@ -155,7 +173,7 @@
 
         <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="saveOrUpdateBook">确 定</el-button>
+        <el-button type="primary" @click="saveOrUpdate">确 定</el-button>
       </span>
       </el-dialog>
     </div>
@@ -163,8 +181,8 @@
 </template>
 
 <script>
-import {deleteBook, getAllBook, saveOrUpdate} from "@/api/book";
 import BHeader from "@/components/layout/BHeader";
+import {deleteUser, getAllUser, saveOrUpdateUser} from "@/api/user";
 
 export default {
   name: "BookManagesView.vue",
@@ -176,21 +194,8 @@ export default {
       tableData:[],
       multipleSelection:null,
       dialogVisible:false,
-      addOrUpdateBook:{
-        id:"",
-        bookName:"",
-        author:"",
-        publisher:"",
-        publishDate:"",
-        unitPrice:"",
-        imgUrl:"",
-        tags:"",
-        lastNum:"",
-        times:"",
-        status:"",
-        sort:"",
-        createTime:"",
-        updateTime:"",
+      addOrUpdateUser:{
+
       }
     }
   },
@@ -205,7 +210,7 @@ export default {
     },
     handleUpd(row){
       console.log(row.id);
-      this.addOrUpdateBook = row
+      this.addOrUpdateUser = row
       this.dialogVisible = true
     },
     handleClose(done) {
@@ -223,12 +228,12 @@ export default {
             ids.push(val.id)
           })
           console.log(ids)
-          deleteBook(ids).then(res=>{
+          deleteUser(ids).then(res=>{
             this.$message({
               type: 'success',
               message: res.data.message
             });
-            getAllBook().then(res=>{
+            getAllUser().then(res=>{
               this.tableData = res.data.rows
             })
           })
@@ -247,13 +252,13 @@ export default {
         });
       }
     },
-    saveOrUpdateBook(){
-      saveOrUpdate(this.addOrUpdateBook).then(res=>{
+    saveOrUpdate(){
+      saveOrUpdateUser(this.addOrUpdateUser).then(res=>{
         alert("操作成功");
-        getAllBook().then(res=>{
+        getAllUser().then(res=>{
           this.tableData = res.data.rows
         })
-        this.addOrUpdateBook = {}
+        this.addOrUpdateUser = {}
       })
       this.dialogVisible = false;
     },
@@ -271,7 +276,7 @@ export default {
     }
   },
   mounted() {
-    getAllBook().then(res=>{
+    getAllUser().then(res=>{
       this.tableData = res.data.rows
     })
   }

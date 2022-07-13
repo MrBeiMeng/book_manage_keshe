@@ -48,3 +48,12 @@ export function saveOrUpdate(book) {
     data:book
   })
 }
+
+
+export function deleteBook(ids) {
+  return request({
+    url: '/book/delete_these_books',
+    method: 'post',
+    data: ids
+  })
+}

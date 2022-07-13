@@ -50,9 +50,9 @@ export function saveOrUpdate(book) {
 }
 
 
-export function deleteBook(ids) {
+export function deleteUser(ids) {
   return request({
-    url: '/book/delete_these_books',
+    url: '/book/delete_these_users',
     method: 'post',
     data: ids
   })

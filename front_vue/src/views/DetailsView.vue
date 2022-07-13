@@ -6,7 +6,7 @@
     <div>
       <el-descriptions class="margin-top" title="书本信息" :column="3" :size="size" border>
         <template slot="extra">
-          <el-button type="primary" size="small">申请借阅</el-button>
+          <el-button type="primary" size="small" @click="addSApplication">申请借阅</el-button>
         </template>
         <el-descriptions-item>
           <template slot="label">
@@ -73,6 +73,7 @@
 <script>
 import BHeader from "@/components/layout/BHeader";
 import {getBook} from "@/api/book";
+import {addApplication} from "@/api/application";
 export default {
   name: "DetailsView",
   components: {BHeader},
@@ -95,6 +96,18 @@ export default {
     getBook(this.bookId).then(res=>{
       this.book = res.data.book
     })
+  },
+  methods:{
+    addSApplication(){
+      let application = {
+        bookId : this.bookId,
+        type: 1,
+        status: 0
+      }
+      addApplication(application).then(res=>{
+        alert("申请成功")
+      })
+    }
   }
 }
 </script>

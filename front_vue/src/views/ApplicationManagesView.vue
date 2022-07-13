@@ -162,7 +162,7 @@ export default {
           deleteApplication(ids).then(res=>{
             this.$message({
               type: 'success',
-              message: res.data.message
+              message: "删除成功"
             });
             getAllApplication().then(res=>{
               this.tableData = res.data.rows

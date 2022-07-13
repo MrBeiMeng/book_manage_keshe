@@ -107,7 +107,7 @@ export default {
       this.$router.replace('/register')
     },
     sendVerifyCode(){
-      if (this.loginForm.username.length <= 3){
+      if (this.loginForm.username.length <= 1){
         this.$notify.error({
           title: '过短',
           message: '请检查账号或邮箱输入是否有误'

@@ -40,3 +40,11 @@ export function getAllBook() {
     method: 'get',
   })
 }
+
+export function saveOrUpdate(book) {
+  return request({
+    url: '/book/save_or_update_book',
+    method: 'post',
+    data:book
+  })
+}

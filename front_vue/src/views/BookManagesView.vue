@@ -155,7 +155,7 @@
 
         <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        <el-button type="primary" @click="saveOrUpdateBook">确 定</el-button>
       </span>
       </el-dialog>
     </div>
@@ -163,7 +163,7 @@
 </template>
 
 <script>
-import {getAllBook} from "@/api/book";
+import {getAllBook, saveOrUpdate} from "@/api/book";
 import BHeader from "@/components/layout/BHeader";
 
 export default {
@@ -200,12 +200,14 @@ export default {
       this.$router.push(`/book_detail/${row.id}`)
     },
     handleAdd(row){
+      // this.addOrUpdateBook = {}
       console.log(row.id);
       this.dialogVisible = true
     },
     handleUpd(row){
       console.log(row.id);
       this.addOrUpdateBook = row
+      this.dialogVisible = true
     },
     handleClose(done) {
       // 关闭
@@ -228,8 +230,12 @@ export default {
         })
       }
     },
-    saveBook(){
-      
+    saveOrUpdateBook(){
+      saveOrUpdate(this.addOrUpdateBook).then(res=>{
+        alert("操作成功")
+      })
+
+      this.dialogVisible = false;
     },
     toggleSelection(rows) {
       if (rows) {

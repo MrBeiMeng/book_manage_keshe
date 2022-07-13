@@ -10,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -62,6 +63,18 @@ public class BookController {
     public R updateBookById(@RequestBody @ApiParam("更新图书的实体类") Book book) {
         bookService.updateById(book);
         return R.ok().message("更新成功");
+    }
+
+    @ApiOperation("更新图书")
+    @PostMapping("save_or_update_book")
+    public R saveOrUpdateBook(@RequestBody @ApiParam("更新或添加图书的实体类") Book book) {
+        if (!StringUtils.isEmpty(book.getId())){
+            bookService.updateById(book);
+            return R.ok().message("更新成功");
+        }else {
+            bookService.save(book);
+            return R.ok().message("添加成功成功");
+        }
     }
 
     @ApiOperation("保存图书")

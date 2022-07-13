@@ -22,8 +22,8 @@
           width="180">
         </el-table-column>
         <el-table-column
-          prop="username"
-          label="用户名"
+          prop="bookId"
+          label="图书Id"
           width="180">
         </el-table-column>
         <el-table-column
@@ -78,10 +78,10 @@
         :before-close="handleClose">
          <div style="">
            <div>
-             用户名：
+             申请名：
              <el-input
                placeholder="请输入内容"
-               v-model="addOrUpdateUser.username"
+               v-model="addOrUpdateApplication.username"
                style="width: 200px"
                clearable>
              </el-input>
@@ -90,7 +90,7 @@
              密码：
              <el-input
                placeholder="请输入内容"
-               v-model="addOrUpdateUser.password"
+               v-model="addOrUpdateApplication.password"
                style="width: 200px"
                clearable>
              </el-input>
@@ -99,7 +99,7 @@
              盐：
              <el-input
                placeholder="请输入内容"
-               v-model="addOrUpdateUser.salt"
+               v-model="addOrUpdateApplication.salt"
                style="width: 200px"
                clearable>
              </el-input>
@@ -108,7 +108,7 @@
              角色：
              <el-input
                placeholder="请输入内容"
-               v-model="addOrUpdateUser.role"
+               v-model="addOrUpdateApplication.role"
                style="width: 200px"
                clearable>
              </el-input>
@@ -117,7 +117,7 @@
              真实名：
              <el-input
                placeholder="请输入内容"
-               v-model="addOrUpdateUser.realName"
+               v-model="addOrUpdateApplication.realName"
                style="width: 200px"
                clearable>
              </el-input>
@@ -126,7 +126,7 @@
              邮箱账号：
              <el-input
                placeholder="请输入内容"
-               v-model="addOrUpdateUser.email"
+               v-model="addOrUpdateApplication.email"
                style="width: 200px"
                clearable>
              </el-input>
@@ -135,7 +135,7 @@
              性别：
              <el-input
                placeholder="请输入内容"
-               v-model="addOrUpdateUser.sex"
+               v-model="addOrUpdateApplication.sex"
                style="width: 200px"
                clearable>
              </el-input>
@@ -144,7 +144,7 @@
              年龄：
              <el-input
                placeholder="请输入内容"
-               v-model="addOrUpdateUser.age"
+               v-model="addOrUpdateApplication.age"
                style="width: 200px"
                clearable>
              </el-input>
@@ -153,7 +153,7 @@
              个人介绍：
              <el-input
                placeholder="请输入内容"
-               v-model="addOrUpdateUser.description"
+               v-model="addOrUpdateApplication.description"
                style="width: 200px"
                clearable>
              </el-input>
@@ -162,7 +162,7 @@
              头像：
              <el-input
                placeholder="请输入内容"
-               v-model="addOrUpdateUser.avatar"
+               v-model="addOrUpdateApplication.avatar"
                style="width: 200px"
                clearable>
              </el-input>
@@ -182,7 +182,7 @@
 
 <script>
 import BHeader from "@/components/layout/BHeader";
-import {deleteUser, getAllUser, saveOrUpdateUser} from "@/api/user";
+import {deleteApplication, getAllApplication, saveOrUpdateApplication} from "@/api/application";
 
 export default {
   name: "BookManagesView.vue",
@@ -194,7 +194,7 @@ export default {
       tableData:[],
       multipleSelection:null,
       dialogVisible:false,
-      addOrUpdateUser:{
+      addOrUpdateApplication:{
 
       }
     }
@@ -210,7 +210,7 @@ export default {
     },
     handleUpd(row){
       console.log(row.id);
-      this.addOrUpdateUser = row
+      this.addOrUpdateApplication = row
       this.dialogVisible = true
     },
     handleClose(done) {
@@ -218,7 +218,7 @@ export default {
     },
     handleDelete(){
       if (this.multipleSelection != null && this.multipleSelection.length !== 0){
-        this.$confirm('此操作将永久删除这些用户, 是否继续?', '提示', {
+        this.$confirm('此操作将永久删除这些申请, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
@@ -228,12 +228,12 @@ export default {
             ids.push(val.id)
           })
           console.log(ids)
-          deleteUser(ids).then(res=>{
+          deleteApplication(ids).then(res=>{
             this.$message({
               type: 'success',
               message: res.data.message
             });
-            getAllUser().then(res=>{
+            getAllApplication().then(res=>{
               this.tableData = res.data.rows
             })
           })
@@ -253,12 +253,12 @@ export default {
       }
     },
     saveOrUpdate(){
-      saveOrUpdateUser(this.addOrUpdateUser).then(res=>{
+      saveOrUpdateApplication(this.addOrUpdateApplication).then(res=>{
         alert("操作成功");
-        getAllUser().then(res=>{
+        getAllApplication().then(res=>{
           this.tableData = res.data.rows
         })
-        this.addOrUpdateUser = {}
+        this.addOrUpdateApplication = {}
       })
       this.dialogVisible = false;
     },
@@ -276,7 +276,7 @@ export default {
     }
   },
   mounted() {
-    getAllUser().then(res=>{
+    getAllApplication().then(res=>{
       this.tableData = res.data.rows
     })
   }

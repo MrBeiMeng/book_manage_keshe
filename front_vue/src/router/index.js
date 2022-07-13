@@ -10,6 +10,7 @@ import SearchesView from "@/views/SearchesView";
 import DetailsView from "@/views/DetailsView";
 import BookManagesView from "@/views/BookManagesView";
 import UserManagesView from "@/views/UserManagesView";
+import ApplicationManagesView from "@/views/ApplicationManagesView";
 
 Vue.use(VueRouter)
 
@@ -49,6 +50,11 @@ const routes = [
     path: '/manage_users',
     name: 'manage_users',
     component: UserManagesView,
+  },
+  {
+    path: '/manage_applications',
+    name: 'manage_applications',
+    component: ApplicationManagesView,
   },
   {
     path: '/book_detail/:bookId',

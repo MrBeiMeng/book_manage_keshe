@@ -29,7 +29,7 @@
       <br>
       <router-link to="/manage_users">管理用户</router-link>
       <br>
-      <router-link to="/manage_books">管理申请</router-link>
+      <router-link to="/manage_applications">管理申请</router-link>
       <!--        <router-link to="/"></router-link>-->
     </nav>
   </div>

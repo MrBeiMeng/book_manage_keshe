@@ -17,7 +17,7 @@ export function saveOrUpdateUser(user) {
 
 export function deleteUser(ids) {
   return request({
-    url: '/user/delete_user_by_id',
+    url: '/user/delete_these_users',
     method: 'post',
     data: ids
   })

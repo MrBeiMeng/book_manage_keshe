@@ -2,12 +2,19 @@ package club.beimeng.book_manage_keshe.controller;
 
 
 import club.beimeng.book_manage_keshe.entity.Application;
+import club.beimeng.book_manage_keshe.entity.User;
 import club.beimeng.book_manage_keshe.service.ApplicationService;
+import club.beimeng.book_manage_keshe.service.UserService;
+import club.beimeng.book_manage_keshe.utils.JwtUtils;
 import club.beimeng.book_manage_keshe.utils.R;
 import io.swagger.annotations.ApiParam;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 /**
  * <p>
@@ -24,6 +31,19 @@ public class ApplicationController {
     @Autowired
     private ApplicationService applicationService;
 
+    @Autowired
+    private UserService userService;
+
+    @PostMapping("/add_application")
+    public R addApplication(@RequestBody Application application){
+        Subject subject = SecurityUtils.getSubject();
+        String principal = (String) subject.getPrincipal();
+        String username = JwtUtils.getUsername(principal);
+        User user = userService.getByUsername(username);
+        application.setUserId(user.getId());
+
+        return R.ok().data("rows",applicationService.save(application));
+    }
     @GetMapping("/get_all_application")
     public R getAllApplication(){
         return R.ok().data("rows",applicationService.list());
@@ -40,9 +60,9 @@ public class ApplicationController {
         }
     }
 
-    @DeleteMapping("delete_application_by_id")
-    public R deleteApplication(@ApiParam("删除用户的编号") String id){
-        applicationService.removeById(id);
+    @PostMapping("delete_these_applications")
+    public R deleteApplication(@ApiParam("删除图书的编号") @RequestBody ArrayList<String> ids){
+        applicationService.removeByIds(ids);
         return R.ok().message("删除成功");
     }
 

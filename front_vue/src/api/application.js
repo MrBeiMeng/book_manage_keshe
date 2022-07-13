@@ -1,5 +1,13 @@
 import request from '@/utils/request'
 
+export function addApplication(application) {
+  return request({
+    url: '/application/add_application',
+    method: 'post',
+    data:application
+  })
+}
+
 export function getAllApplication() {
   return request({
     url: '/application/get_all_application',
@@ -17,7 +25,7 @@ export function saveOrUpdateApplication(application) {
 
 export function deleteApplication(ids) {
   return request({
-    url: '/application/delete_application_by_id',
+    url: '/application/delete_these_applications',
     method: 'post',
     data: ids
   })

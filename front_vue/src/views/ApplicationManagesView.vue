@@ -27,40 +27,25 @@
           width="180">
         </el-table-column>
         <el-table-column
-          prop="password"
-          label="密码">
+          prop="userId"
+          label="用户Id">
         </el-table-column>
         <el-table-column
-          prop="salt"
-          label="盐">
+          prop="type"
+          label="申请类型">
+          <template slot-scope="scope">
+            <span v-show="scope.row.type === 1">申请借阅</span>
+            <span v-show="scope.row.type === 2">申请还书</span>
+          </template>
         </el-table-column>
         <el-table-column
-          prop="role"
-          label="角色">
-        </el-table-column>
-        <el-table-column
-          prop="realName"
-          label="真实名">
-        </el-table-column>
-        <el-table-column
-          prop="email"
-          label="邮箱账号">
-        </el-table-column>
-        <el-table-column
-          prop="sex"
-          label="性别">
-        </el-table-column>
-        <el-table-column
-          prop="age"
-          label="年龄">
-        </el-table-column>
-        <el-table-column
-          prop="description"
-          label="个人介绍">
-        </el-table-column>
-        <el-table-column
-          prop="avatar"
-          label="头像">
+          prop="status"
+          label="申请状态">
+          <template slot-scope="scope">
+            <span v-show="scope.row.status === 0">未审批</span>
+            <span v-show="scope.row.status === 1">已同意</span>
+            <span v-show="scope.row.status === 2">已拒绝</span>
+          </template>
         </el-table-column>
         <el-table-column
           label="操作">
@@ -78,91 +63,37 @@
         :before-close="handleClose">
          <div style="">
            <div>
-             申请名：
+             图书id：
              <el-input
-               placeholder="请输入内容"
-               v-model="addOrUpdateApplication.username"
+               placeholder="bookId"
+               v-model="addOrUpdateApplication.bookId"
                style="width: 200px"
                clearable>
              </el-input>
            </div>
            <div>
-             密码：
+             用户id：
              <el-input
-               placeholder="请输入内容"
-               v-model="addOrUpdateApplication.password"
+               placeholder="userId"
+               v-model="addOrUpdateApplication.userId"
                style="width: 200px"
                clearable>
              </el-input>
            </div>
            <div>
-             盐：
+             申请类型：
              <el-input
-               placeholder="请输入内容"
-               v-model="addOrUpdateApplication.salt"
+               placeholder="type 申请借 1  申请还 2"
+               v-model="addOrUpdateApplication.type"
                style="width: 200px"
                clearable>
              </el-input>
            </div>
            <div>
-             角色：
+             申请状态：
              <el-input
-               placeholder="请输入内容"
-               v-model="addOrUpdateApplication.role"
-               style="width: 200px"
-               clearable>
-             </el-input>
-           </div>
-           <div>
-             真实名：
-             <el-input
-               placeholder="请输入内容"
-               v-model="addOrUpdateApplication.realName"
-               style="width: 200px"
-               clearable>
-             </el-input>
-           </div>
-           <div>
-             邮箱账号：
-             <el-input
-               placeholder="请输入内容"
-               v-model="addOrUpdateApplication.email"
-               style="width: 200px"
-               clearable>
-             </el-input>
-           </div>
-           <div>
-             性别：
-             <el-input
-               placeholder="请输入内容"
-               v-model="addOrUpdateApplication.sex"
-               style="width: 200px"
-               clearable>
-             </el-input>
-           </div>
-           <div>
-             年龄：
-             <el-input
-               placeholder="请输入内容"
-               v-model="addOrUpdateApplication.age"
-               style="width: 200px"
-               clearable>
-             </el-input>
-           </div>
-           <div>
-             个人介绍：
-             <el-input
-               placeholder="请输入内容"
-               v-model="addOrUpdateApplication.description"
-               style="width: 200px"
-               clearable>
-             </el-input>
-           </div>
-           <div>
-             头像：
-             <el-input
-               placeholder="请输入内容"
-               v-model="addOrUpdateApplication.avatar"
+               placeholder="status 0 未审批 1 同意 2 拒接"
+               v-model="addOrUpdateApplication.status"
                style="width: 200px"
                clearable>
              </el-input>
@@ -240,10 +171,7 @@ export default {
           this.dialogVisible = false
           this.toggleSelection(null)
         }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消删除'
-          });
+console.log("删除成功")
         })
       }else{
         this.$message({

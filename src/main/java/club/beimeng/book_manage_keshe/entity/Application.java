@@ -31,7 +31,7 @@ public class Application implements Serializable {
 
     private String userId;
 
-    @ApiModelProperty(value = "申请借 1  申请还 3")
+    @ApiModelProperty(value = "申请借 1  申请还 2")
     private Integer type;
 
     @ApiModelProperty(value = "0 未审批 1 同意 2 拒接")

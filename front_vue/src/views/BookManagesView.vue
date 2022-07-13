@@ -235,10 +235,7 @@ export default {
           this.dialogVisible = false
           this.toggleSelection(null)
         }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消删除'
-          });
+console.log("删除成功")
         })
       }else{
         this.$message({
